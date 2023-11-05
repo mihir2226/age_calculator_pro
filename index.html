@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>Frontend Mentor | Age calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+
+    body{
+      background-color: hsl(0, 0%, 94%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container{
+      background-color: hsl(0, 0%, 100%);
+      border-radius: 40px 40px 200px;
+      width: 950px;
+      height: 650px;
+      margin-top: 8%;
+      margin-bottom: 2%;
+      padding: 50px 50px 50px 60px;
+
+    }
+
+    /* form {
+      display: flex;
+      background-color: red;
+      justify-content: center;
+    } */
+
+    .fill_data{
+      display: flex;
+      /* background-color: aqua; */
+      height: 150px;
+      width: 750px;
+      /* justify-content: space-between; */
+      border-bottom: 1px solid grey;
+    }
+
+    label{
+      color:hsl(0, 0%, 86%);
+      letter-spacing: 5px;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: gray;
+    }
+
+
+    input{
+      max-width: 150px;
+      height: 70px;
+      border: 1px solid lightgray;
+      border-radius: 8px;
+      font-size: 32px;
+      font-weight: 600;
+      padding-left: 20px;
+      margin-right: 35px;
+      outline: none;
+    }
+
+    #click-me{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: hsl(259, 100%, 65%);
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      transform: translate(700px,-50px);
+    }
+
+    #click-me img{
+      width: 50px;
+      height: 50px;
+    }
+
+    .show_data{
+      margin-top: 30px;
+    }
+
+    .show_data h1{
+      font-size: 100px;
+      font-weight: 600;
+    }
+
+    .show_data h1 span{
+      color: hsl(259, 100%, 65%);
+      letter-spacing: 15px;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+      <form>
+        <div class="fill_data">
+          <span><label for="day">DAY </label></br>
+          <input type="text" id="dayIn" placeholder="DD"></span>
+
+          <span><label for="month">MONTH </label><br>
+          <input type="text" id="monthIn" placeholder="MM"></span>
+
+          <span><label for="year">YEAR <br>
+          <input type="text" id="yearIn" placeholder="YYYY"></label></span>
+          
+        </div>
+        
+      </form>
+      
+      <button id="click-me"><img src="./assets/images/icon-arrow.svg" alt="click me"></button>
+
+      <div class="show_data">
+        <h1><span id="yearOut">--</span>years</h1>
+        <h1><span id="monthOut">--</span>months</h1>
+        <h1><span id="dayOut">--</span>days</h1>
+      </div>
+    </div>
+    
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    
+    function ageCalc(){
+      const inputs = document.querySelectorAll("input");
+      let validator = true;
+
+      inputs.forEach((i) => {
+        const parent = i.parentElement;
+        if (!i.value) {
+          i.style.borderColor = "red";
+          parent.querySelector("small").innerText = "this field is required.";
+          validator = false;
+        } else if (monthInp.value > 12) {
+          monthInp.style.borderColor = "red";
+          monthInp.parentElement.querySelector("small").innerText = "must be a valid month.";
+        } else if (dayInp.value > 31) {
+          dayInp.style.borderColor = "red";
+          dayInp.parentElement.querySelector("small").innerText = "must be a valid day.";
+          validator = false;
+        } else {
+          i.style.borderColor = black;
+          parent.querySelector("small").innerText = "";
+          validator = true;
+        }
+      })
+      return validator;
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      if (validate()) {
+        if (dayInp.value > day) {
+          day = day + months[month - 1];
+          month = month - 1;
+        }
+        if (monthInp.value > month) {
+          month = month + 12;
+          year = year - 1;
+        }
+
+        const d = day - dayInp.value;
+        const m = month - monthInp.value;
+        const y = year - yearInp.value;
+
+        dayOtp.innerHTML = d;
+        monthOtp.innerHTML = m;
+        yearOtp.innerHTML = y;
+
+      }
+    }
+
+    let click_me_button = document.getElementById('click-me');
+    click_me_button.addEventListener("click", ageCalc);
+
+  </script>
+</body>
+</html>
